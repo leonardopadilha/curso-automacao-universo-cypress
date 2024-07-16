@@ -22,9 +22,9 @@ describe('Cadastro de usuário', () => {
             const msg = "Agora você se tornou um(a) Samurai, faça seu login para ver seus agendamentos!"
     
             cy.visit('/signup')
-            cy.get('[placeholder="Nome"]').type(user.name)
-            cy.get('[placeholder="E-mail"]').type(user.email)
-            cy.get('[placeholder="Senha"]').type(user.password)
+            cy.get('[placeholder^="Nome"]').type(user.name) // começa com...
+            cy.get('[placeholder$="email"]').type(user.email) // termina com...
+            cy.get('[placeholder*="senha"]').type(user.password) // possui em qualquer parte da frase
     
             cy.contains('button', 'Cadastrar').click()
     
@@ -67,9 +67,9 @@ describe('Cadastro de usuário', () => {
             const msg = "Email já cadastrado para outro usuário."
     
             cy.visit('/signup')
-            cy.get('[placeholder="Nome"]').type(userCadastrado.name)
-            cy.get('[placeholder="E-mail"]').type(userCadastrado.email)
-            cy.get('[placeholder="Senha"]').type(userCadastrado.password)
+            cy.get('[placeholder^="Nome"]').type(userCadastrado.name)
+            cy.get('[placeholder$="email"]').type(userCadastrado.email)
+            cy.get('[placeholder*="senha"]').type(userCadastrado.password)
     
             cy.contains('button', 'Cadastrar').click()
     

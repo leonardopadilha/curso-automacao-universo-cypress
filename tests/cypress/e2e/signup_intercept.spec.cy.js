@@ -10,9 +10,9 @@ describe('Cadastro de usuário', () => {
         const msg = "Agora você se tornou um(a) Samurai, faça seu login para ver seus agendamentos!"
 
         cy.visit('/signup')
-        cy.get('[placeholder="Nome"]').type(name)
-        cy.get('[placeholder="E-mail"]').type(email)
-        cy.get('[placeholder="Senha"]').type(password)
+        cy.get('[placeholder^="Nome"]').type(name)
+        cy.get('[placeholder$="email"]').type(email)
+        cy.get('[placeholder*="senha"]').type(password)
 
         cy.intercept('POST', '/users', {
             statusCode: 200
