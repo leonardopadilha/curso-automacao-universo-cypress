@@ -65,4 +65,22 @@ describe('Cadastro de usuário', () => {
             signupPage.toast.shouldHaveText(expectedText)
         })
     })
+
+    context('quando o email é incorreto', function() {
+        const user = {
+            name: "Elizabeth Olsen",
+            email: "liza.yahoo.com",
+            password: "pwd123"
+        }
+
+        it('deve exibir mensagem de alerta', function() {
+            const expectedText = "Informe um email válido"
+
+            signupPage.go()
+            signupPage.form(user)
+            signupPage.submit()
+            signupPage.alertHaveText(expectedText)
+
+        })
+    })
 })
