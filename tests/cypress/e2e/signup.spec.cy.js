@@ -83,4 +83,25 @@ describe('Cadastro de usuário', () => {
 
         })
     })
+
+    context('quando a senha é muito curta', function() {
+        const passwords = ['1', '2a', 'ab3', 'abc4', 'ab#c5']
+
+        beforeEach(function() {
+            signupPage.go()
+        })
+
+        passwords.forEach(function(p) {
+            it(`não deve cadastrar com a senha: ${p}`, function() {
+                const user = { name: 'Tony Stark', email: 'tony@samuraibs.com', password: p}
+
+                signupPage.form(user)
+                signupPage.submit()
+            })
+        })
+
+        afterEach(function() {
+            signupPage.alertHaveText('Pelo menos 6 caracteres')
+        })
+    })
 })
