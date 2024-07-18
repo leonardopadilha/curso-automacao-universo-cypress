@@ -104,4 +104,23 @@ describe('Cadastro de usuário', () => {
             signupPage.alertHaveText('Pelo menos 6 caracteres')
         })
     })
+
+    context('quando não preencho nenhum dos campos', function() {
+        const alertMessages = [
+            'Nome é obrigatório',
+            'E-mail é obrigatório',
+            'Senha é obrigatória'
+        ]
+
+        beforeEach(function() {
+            signupPage.go()
+            signupPage.submit()
+        })
+
+        alertMessages.forEach(function(alert) {
+            it(`deve exibir ${alert.toLowerCase()}`, function() {
+                signupPage.alertHaveText(alert)
+            })
+        })
+    })
 })
