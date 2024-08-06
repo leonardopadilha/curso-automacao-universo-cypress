@@ -67,7 +67,7 @@ describe('Cadastro de usuário', () => {
             signupPage.go()
             signupPage.form(user)
             signupPage.submit()
-            signupPage.alertHaveText(expectedText)
+            signupPage.alert.haveText(expectedText)
 
         })
     })
@@ -89,7 +89,7 @@ describe('Cadastro de usuário', () => {
         })
 
         afterEach(function() {
-            signupPage.alertHaveText('Pelo menos 6 caracteres')
+            signupPage.alert.haveText('Pelo menos 6 caracteres')
         })
     })
 
@@ -107,7 +107,7 @@ describe('Cadastro de usuário', () => {
 
         alertMessages.forEach(function(alert) {
             it(`deve exibir ${alert.toLowerCase()}`, function() {
-                signupPage.alertHaveText(alert)
+                signupPage.alert.haveText(alert)
             })
         })
     })

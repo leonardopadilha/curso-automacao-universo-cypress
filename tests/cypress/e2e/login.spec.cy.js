@@ -24,7 +24,7 @@ describe('login', function() {
         })
     })
 
-    contexto('quando o usuário é bom mas a senha está incorreta', function() {
+    context('quando o usuário é bom mas a senha está incorreta', function() {
         let user = {
             name: 'Celso Kamura',
             email: 'kamura@samuraibs.com',
@@ -48,7 +48,7 @@ describe('login', function() {
         })
     })
 
-    context('quando o formato do email é inválido', function() {
+    context.only('quando o formato do email é inválido', function() {
         const emails = [
             'papito.com.br',
             'yahoo.com',
@@ -64,13 +64,13 @@ describe('login', function() {
             loginPage.go()
         })
 
-        emails.forEach(function(email) {
+        emails(function(email) {
             it(`não deve logar com o email: ${email}`, function() {
                 const user = { email: email, password: 'pwd123' }
 
                 loginPage.form(user)
                 loginPage.submit()
-                loginPage.alertHaveText('Informe um email válido')
+                loginPage.alert.haveText('Informe um email válido')
             })
         })
     })
@@ -88,7 +88,7 @@ describe('login', function() {
 
         alertMessages.forEach(function(alert) {
             it(`deve exibir ${alert.toLowerCase()}`, function() {
-                loginPage.alertHaveText(alert)
+                loginPage.alert.haveText(alert)
             })
         })
     })
