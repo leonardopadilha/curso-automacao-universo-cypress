@@ -39,11 +39,9 @@ module.exports = defineConfig({
               'ORDER BY B.created_at', [email], function(error, result) {
                 if (error) {
                   throw error
-              }
+                }
               resolve({ token: result.rows[0].token })
-          })
-              }
-            )
+            })
           })
         }
       })
