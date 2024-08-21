@@ -1,4 +1,5 @@
 import loginPage from '../support/pages/login' 
+import dashPage from '../support/pages/dash'
 
 describe('dashboard', function () {
     context('quando o cliente faz um agendamento no app mobile', function () {
@@ -12,7 +13,8 @@ describe('dashboard', function () {
                 name: 'Ramon Valdes',
                 email: 'ramon@televisa.com',
                 is_provider: true
-            }
+            },
+            appointmentHour: '14:00'
         }
 
         before(function() {
@@ -23,22 +25,29 @@ describe('dashboard', function () {
             cy.log('Conseguimos pegar o token ' + Cypress.env('apiToken'))
 
             cy.setProviderId(data.provider.email)
-            cy.createAppointment()
+            cy.createAppointment(data.appointmentHour)
         })
         it('o mesmo deve ser exibido no dashboard', function() {
             loginPage.go()
             loginPage.form(data.provider)
             loginPage.submit()
+
+            const day = Cypress.env('appointmentDay')
+            dashPage.calendarShouldBeVisible(day)
+            dashPage.appointmentShouldBe(data.customer, data.appointmentHour)
+
         })
     })
 })
 
 import moment from 'moment'
 
-Cypress.Commands.add('createAppointment', function() {
+Cypress.Commands.add('createAppointment', function(hour) {
     let now = new Date()
     now.setDate(now.getDate() + 1)
-    const date = moment(now).format('YYYY-MM-DD 14:00:00')
+    const date = moment(now).format('YYYY-MM-DD ' + hour + ":00")
+
+    Cypress.env('appointmentDay', now.getDate())
 
     const payload = {
         provider_id: Cypress.env('providerId'),
