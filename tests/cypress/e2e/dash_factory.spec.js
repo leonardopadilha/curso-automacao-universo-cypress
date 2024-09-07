@@ -15,12 +15,13 @@ describe('dashboard', function () {
             cy.createAppointment(appointment.hour)
         })
         it('o mesmo deve ser exibido no dashboard', function() {
-            const day = Cypress.env('appointmentDay')
+            const date = Cypress.env('appointmentDate')
             
             //cy.uiLogin(provider)
-            cy.apiLogin(provider, true) // salvando token no localStorage quando os dados é do provider
+            cy.apiLogin(provider, true) // salvando token no local Storage quando os dados é do provider
 
-            dashPage.calendarShouldBeVisible(day)
+            dashPage.calendarShouldBeVisible()
+            dashPage.selectDay(date)
             dashPage.appointmentShouldBe(customer, appointment.hour)
 
         })
