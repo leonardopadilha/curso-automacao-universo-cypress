@@ -24,6 +24,17 @@ describe('dashboard', function () {
             dashPage.selectDay(date)
             dashPage.appointmentShouldBe(customer, appointment.hour)
 
+            // screenshot apenas para esse cenário
+            //cy.screenshot()
+
         })
     })
 })
+
+/*
+Para executar apenas um arquivo via terminal
+npx cypress run --spec endereco-do-arquivo
+npx cypress run --spec endereco-do-arquivo --browser chrome
+npx cypress run --spec endereco-do-arquivo --browser edge
+npx cypress run --spec endereco-do-arquivo --browser firefox
+*/
