@@ -7,6 +7,7 @@ module.exports = defineConfig({
   e2e: {
     baseUrl: 'http://localhost:3000',
     apiServer: 'http://localhost:3333',
+    //defaultCommandTimeout: 30000,
     viewportWidth: 1440,
     viewportHeight: 900,
     setupNodeEvents(on, config) {
